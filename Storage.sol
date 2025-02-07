@@ -24,13 +24,15 @@ contract Storage {
     }
      
    function increaseBalance(int amount) public {
-        balance += amount;
-    }
-    event NewPullRequest(address indexed sender, uint256 requestId);
+      balance += amount;
+   }
+
+   event NewPullRequest(address indexed sender, uint256 requestId);
     
     function createNewPR() external returns (uint256) {
-    require(msg.sender == Storage(owner).owner); 
-     emit NewPullRequest(msg.sender, pullRequestId);
+      require(msg.sender == Storage(owner).owner); 
+      emit NewPullRequest(msg.sender, pullRequstId);
       return pullRequestId++;
    
+   }
 }
