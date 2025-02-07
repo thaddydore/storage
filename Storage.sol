@@ -5,10 +5,10 @@ pragma solidity 0.8.24;
 
 contract Storage {
 
-   int public balance;
+   uint256 public balance;
    address public owner;
 
-   constructor() {
+   constructor() payable {
       balance = msg.value;
       owner = msg.sender;
    }
