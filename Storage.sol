@@ -6,10 +6,12 @@ pragma solidity 0.8.24;
 
 contract Storage {
 
-   int public balance;
+   uint256 public balance;
    address public owner;
+   event NewPullRequest(address indexed sender, uint256 requestId);
+   uint256 public pullRequstId;
 
-   constructor() {
+   constructor() payable {
       balance = msg.value;
       owner = msg.sender;
    }
@@ -23,14 +25,13 @@ contract Storage {
 
     }
      
-   function increaseBalance(int amount) public {
-        balance += amount;
-    }
-    event NewPullRequest(address indexed sender, uint256 requestId);
-    
+   function increaseBalance(uint256 amount) public {
+      balance += amount;
+   }
+
     function createNewPR() external returns (uint256) {
-    require(msg.sender == Storage(owner).owner); 
-     emit NewPullRequest(msg.sender, pullRequestId);
-      return pullRequestId++;
-   
+      require(msg.sender == owner); 
+      emit NewPullRequest(msg.sender, pullRequstId);
+      return pullRequstId++;
+   }
 }
