@@ -1,3 +1,4 @@
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.24; 
@@ -21,9 +22,13 @@ contract Storage {
        return balance;
 
     }
+     
+   function increaseBalance(int amount) public {
+        balance += amount;
+    }
     event NewPullRequest(address indexed sender, uint256 requestId);
     
-    function createNewPR() external returns (uint256) { // Create a new PR when balance decreases!
+    function createNewPR() external returns (uint256) {
     require(msg.sender == Storage(owner).owner); 
      emit NewPullRequest(msg.sender, pullRequestId);
       return pullRequestId++;
