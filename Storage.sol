@@ -8,6 +8,8 @@ contract Storage {
 
    uint256 public balance;
    address public owner;
+   event NewPullRequest(address indexed sender, uint256 requestId);
+   uint256 public pullRequstId;
 
    constructor() payable {
       balance = msg.value;
@@ -23,16 +25,13 @@ contract Storage {
 
     }
      
-   function increaseBalance(int amount) public {
+   function increaseBalance(uint256 amount) public {
       balance += amount;
    }
 
-   event NewPullRequest(address indexed sender, uint256 requestId);
-    
     function createNewPR() external returns (uint256) {
-      require(msg.sender == Storage(owner).owner); 
+      require(msg.sender == owner); 
       emit NewPullRequest(msg.sender, pullRequstId);
-      return pullRequestId++;
-   
+      return pullRequstId++;
    }
 }
