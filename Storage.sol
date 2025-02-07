@@ -1,16 +1,14 @@
 // SPDX-License-Identifier: MIT
-
-pragma solidity 0.8.24; 
-
+pragma solidity ^0.8.24;
 
 contract Storage {
+    int public balance;
 
-   int public balance;
-   address public owner;
+    constructor() {
+        balance = msg.value;
+    }
 
-   constructor() {
-      balance = msg.value;
-      owner = msg.sender;
-   }
-   
+    function increaseBalance(int amount) public {
+        balance += amount;
+    }
 }
