@@ -1,14 +1,36 @@
+
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+
+pragma solidity 0.8.24; 
+
 
 contract Storage {
-    int public balance;
 
-    constructor() {
-        balance = msg.value;
+   int public balance;
+   address public owner;
+
+   constructor() {
+      balance = msg.value;
+      owner = msg.sender;
+   }
+
+   function decreaseBalance(uint amount) public returns (uint256) {
+        require(msg.sender == owner);
+        if(amount <= balance){
+          balance -= amount;  
+       }
+       return balance;
+
     }
-
-    function increaseBalance(int amount) public {
+     
+   function increaseBalance(int amount) public {
         balance += amount;
     }
+    event NewPullRequest(address indexed sender, uint256 requestId);
+    
+    function createNewPR() external returns (uint256) {
+    require(msg.sender == Storage(owner).owner); 
+     emit NewPullRequest(msg.sender, pullRequestId);
+      return pullRequestId++;
+   
 }
